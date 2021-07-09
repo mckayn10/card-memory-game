@@ -1,0 +1,30 @@
+.container {
+    position:absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+    width: 100vw;
+    background-color: rgb(138, 74, 74);
+    
+}
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title {
+    margin: 10px;
+    color: white;
+}
+.timer {
+    color: white;
+}
+.game-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 80%;
+    width: 90%;
+    background-color: rgba(236, 206, 206, 0);
+}
