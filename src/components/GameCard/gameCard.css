@@ -1,4 +1,5 @@
 
+
 .card-text {
     font-size: 50px;
 }
@@ -7,9 +8,8 @@
 }
 
 .flip-card {
-    width: 200px;
-    height: 150px;
     margin: 10px;
+    cursor: pointer;
   }
 
  .matched {
@@ -20,7 +20,7 @@
   .flip-card-inner {
     position: relative;
     width: 200px;
-    height: 150px;
+    height: 140px;
     text-align: center;
     transition: transform 0.8s;
     transform-style: preserve-3d;
@@ -30,7 +30,7 @@
   .flipped-card .flip-card-inner {
     transform: rotateY(180deg);
     width: 200px;
-    height: 150px;
+    height: 140px;
     margin: 10px;
   }
   
@@ -56,7 +56,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(252, 88, 88);
     color: white;
     transform: rotateY(180deg);
   }

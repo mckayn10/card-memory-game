@@ -11,7 +11,7 @@ class ClickCounter extends Component {
                 {!this.props.gameOver ? 
                 <div>
                     <h1 className="counter-text">Clicks: {this.props.clicks}</h1> 
-                    <div className="min-text">(minumum of 20)</div>
+                    <div className="min-text">(minumum of {this.props.minClicks})</div>
                 </div>
                 
                 : null}

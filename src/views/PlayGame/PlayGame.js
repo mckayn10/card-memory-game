@@ -28,7 +28,8 @@ class PlayGame extends Component {
                 id: index,
                 number: card.number,
                 flipped: false,
-                matched: false
+                matched: false,
+                image: card.image
             };
         })
         return newCards
@@ -41,6 +42,14 @@ class PlayGame extends Component {
             number,
             index
         };
+
+        if(flippedCards.length > 0){
+            if(currentCard.index === flippedCards[0].index){
+                return false;
+            }
+        }
+
+
 
         //update card is flipped
         let updateCards = currentCardList.map(card => {
@@ -107,12 +116,18 @@ class PlayGame extends Component {
             if (!card.matched) {
                 gameIsOver = false
             }
+            return null;
         })
 
         this.setState({
             gameOver: gameIsOver,
-            highScore: this.state.clicks
         })
+
+        if(gameIsOver){
+            this.setState({
+                highScore: this.state.clicks
+            })
+        }
     }
 
     restart = () => {
@@ -136,6 +151,7 @@ class PlayGame extends Component {
                     matched={card.matched}
                     flipped={card.flipped}
                     clicked={this.state.flippedCards.length === 2 ? () => { } : () => this.handleClick(card.number, i)}
+                    image={card.image}
                 />
             )
         })
@@ -150,6 +166,7 @@ class PlayGame extends Component {
                     <ClickCounter 
                         clicks={this.state.clicks} 
                         gameOver={this.state.gameOver}
+                        minClicks={cards.length}
                     />
                 </div>
                 {!this.state.gameOver 

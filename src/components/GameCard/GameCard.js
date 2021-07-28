@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import './gameCard.css';
 
 class GameCard extends Component {
-
-
+    
+    
     render() {
+        let backgroundImg = this.props.image
 
         return (
             <div 
@@ -15,8 +16,14 @@ class GameCard extends Component {
                     <div className="flip-card-front common-styles">
                         <h1 className="card-text">?</h1>
                     </div>
-                    <div className="flip-card-back common-styles">
-                        <h1 className="card-text">{this.props.number}</h1>
+                    <div className="flip-card-back common-styles" 
+                        style={{
+                            backgroundImage: `url(${backgroundImg})`,
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundSize: 'cover',
+
+                        }}>
                     </div>
                 </div>
             </div>
