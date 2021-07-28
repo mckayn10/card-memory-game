@@ -1,81 +1,117 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import GameCard from '../../components/GameCard/GameCard'
 import cards from '../../Data/cardData'
 import './playGame.css'
 
 class PlayGame extends Component {
     state = {
-        firstFlipValue: 0,
-        firstFlipIndex: false,
-        currentCardList: cards,
-        selectedCards: [],
-        isFlipped: false
+        currentCardList: [],
+        flippedCards: [],
+        matchedNumbers: [],
     }
 
     componentDidMount(){
-        this.shuffleArr()
-    }
-
-    updateCardValues = (number, index) => {
-        if (this.state.firstFlipValue === 0){
-            this.setState({
-                firstFlipValue: number,
-                firstFlipIndex: index
-            })
-        }
-    }
-
-    updateSelectedCards = (index) => {
-        this.setState(prevState => ({
-            selectedCards: [...prevState.selectedCards, index]
-        }))
-
-    }
-
-    resetCardValues = () => {
         this.setState({
-            firstFlipValue: 0,
+            currentCardList: this.shuffleArr(cards)
         })
     }
 
-    shuffleArr() {
-        const cardsList = this.state.currentCardList.sort(() => Math.random() - 0.5);
-        this.setState({
-            currentCardList: cardsList
+    shuffleArr(arr) {
+        const cardsList = arr.sort(() => Math.random() - 0.5);
+    
+        let newCards = cardsList.map((card, index) => {
+            return {
+                id: index,
+                number: card.number,
+                flipped: false,
+                matched: false
+              };
         })
+        return newCards
     }
 
-    flipCard = (f) => {
-        this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
-    }
+    handleClick = (number, index) => {
+        const {currentCardList, flippedCards} = this.state
 
-    flipCards = (gameCards) => {
-        console.log('game cards', gameCards)
-        gameCards.map(element => {
-            console.log(element.key)
-            if(element.key == 0){
-                console.log('flip')
-                this.flipCard()
+        let currentCard = {
+            number,
+            index
+        };
+
+        //update card is flipped
+        let updateCards = currentCardList.map(card => {
+            if (card.id === index) {
+                card.flipped = true;
             }
+            return card;
         });
+
+
+        console.log('first update', updateCards)
+
+
+        let updateFlipped = flippedCards;
+        updateFlipped.push(currentCard);
+
+        this.setState({
+            currentCardList: updateCards
+        })
+        this.addToFlippedCards(updateFlipped)
+
+
     }
 
-    render(){
+    addToFlippedCards(updateFlipped) {
+        const {currentCardList, flippedCards} = this.state
+
+        this.setState({
+            flippedCards: updateFlipped
+        }, () => {
+
+            //if 2 cards are flipped, check if they are a match
+            if (flippedCards.length === 2) {
+                setTimeout(() => {
+                    this.check();
+                }, 750);
+            }
+        })
+    }
+
+    check = () => {
+        const {currentCardList, flippedCards} = this.state
+        let updateCards = currentCardList;
+
+        if (
+          flippedCards[0].number === flippedCards[1].number &&
+          flippedCards[0].index !== flippedCards[1].index
+        ) {
+          updateCards[flippedCards[0].index].matched = true;
+          updateCards[flippedCards[1].index].matched = true;
+        } else {
+          updateCards[flippedCards[0].index].flipped = false;
+          updateCards[flippedCards[1].index].flipped = false;
+        }
+
+
+        this.setState({
+            currentCardList: updateCards,
+            flippedCards: []
+        })
+
+    }
+
+    render() {
+        console.log('staaaaate',this.state.currentCardList)
 
         const gameCardsList = this.state.currentCardList.map((card, i) => {
             return (
-                <GameCard 
+                <GameCard
                     key={i}
                     index={i}
                     number={card.number}
-                    updateCardValues={() => this.updateCardValues(card.number, i)}
-                    updateSelectedCards={() => this.updateSelectedCards(i)}
-                    resetCardValues={() => this.resetCardValues()}
-                    firstFlipVal={this.state.firstFlipValue}
-                    firstFlipIndex= {this.state.firstFlipIndex}
-                    selectedCards={this.state.selectedCards}
-                    isFlipped={this.state.isFlipped}
-                    flipCard={() => this.flipCard()}
+                    matched={card.matched}
+                    flipped={card.flipped}
+                    clicked={this.state.flippedCards.length === 2 ? () => { } : () => this.handleClick(card.number, i)}
                 />
             )
         })
@@ -85,7 +121,6 @@ class PlayGame extends Component {
                 <div className="header">
                     <h1 className='title'>CARD MATCHING GAME</h1>
                     <h3 className="timer">Timer</h3>
-                    <button onClick={() => this.flipCards(gameCardsList)}>FLIP ALL CARDS</button>
                 </div>
                 <div className="game-container">
                     {gameCardsList}
