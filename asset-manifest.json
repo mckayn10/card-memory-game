@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "/card-memory-game/static/css/main.127ed5ab.chunk.css",
+    "main.js": "/card-memory-game/static/js/main.ab958b3b.chunk.js",
+    "main.js.map": "/card-memory-game/static/js/main.ab958b3b.chunk.js.map",
+    "runtime-main.js": "/card-memory-game/static/js/runtime-main.f751ca70.js",
+    "runtime-main.js.map": "/card-memory-game/static/js/runtime-main.f751ca70.js.map",
+    "static/js/2.99841b60.chunk.js": "/card-memory-game/static/js/2.99841b60.chunk.js",
+    "static/js/2.99841b60.chunk.js.map": "/card-memory-game/static/js/2.99841b60.chunk.js.map",
+    "static/js/3.39baebb7.chunk.js": "/card-memory-game/static/js/3.39baebb7.chunk.js",
+    "static/js/3.39baebb7.chunk.js.map": "/card-memory-game/static/js/3.39baebb7.chunk.js.map",
+    "index.html": "/card-memory-game/index.html",
+    "static/css/main.127ed5ab.chunk.css.map": "/card-memory-game/static/css/main.127ed5ab.chunk.css.map",
+    "static/js/2.99841b60.chunk.js.LICENSE.txt": "/card-memory-game/static/js/2.99841b60.chunk.js.LICENSE.txt",
+    "static/media/playGame.css": "/card-memory-game/static/media/card-mat.e30b4169.jpg",
+    "static/media/chubbs2.59344bb2.jpg": "/card-memory-game/static/media/chubbs2.59344bb2.jpg",
+    "static/media/donkey.ed4b85f2.jpg": "/card-memory-game/static/media/donkey.ed4b85f2.jpg",
+    "static/media/jonas.f6d5a979.jpg": "/card-memory-game/static/media/jonas.f6d5a979.jpg",
+    "static/media/mac.b6a7d7a8.jpg": "/card-memory-game/static/media/mac.b6a7d7a8.jpg",
+    "static/media/nikki.33241d97.jpg": "/card-memory-game/static/media/nikki.33241d97.jpg",
+    "static/media/packs.e98eafd9.jpg": "/card-memory-game/static/media/packs.e98eafd9.jpg",
+    "static/media/pais.cb7987e6.jpg": "/card-memory-game/static/media/pais.cb7987e6.jpg",
+    "static/media/piece.f83fe70e.jpg": "/card-memory-game/static/media/piece.f83fe70e.jpg",
+    "static/media/rj.5d00f11f.jpg": "/card-memory-game/static/media/rj.5d00f11f.jpg",
+    "static/media/ryan.a6a278c5.jpg": "/card-memory-game/static/media/ryan.a6a278c5.jpg",
+    "static/media/skeets.8fd796f8.jpg": "/card-memory-game/static/media/skeets.8fd796f8.jpg",
+    "static/media/skin.53f85439.jpg": "/card-memory-game/static/media/skin.53f85439.jpg",
+    "static/media/stella.833b47a6.jpg": "/card-memory-game/static/media/stella.833b47a6.jpg",
+    "static/media/tatum.a14d048c.jpg": "/card-memory-game/static/media/tatum.a14d048c.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f751ca70.js",
+    "static/js/2.99841b60.chunk.js",
+    "static/css/main.127ed5ab.chunk.css",
+    "static/js/main.ab958b3b.chunk.js"
+  ]
+}
