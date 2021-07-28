@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import GameCard from '../../components/GameCard/GameCard'
+import GameOverView from '../GameOver/GaveOverView'
+import ClickCounter from '../../components/ClickCounter/ClickCounter'
 import cards from '../../Data/cardData'
 import './playGame.css'
 
@@ -7,31 +9,33 @@ class PlayGame extends Component {
     state = {
         currentCardList: [],
         flippedCards: [],
-        matchedNumbers: [],
+        gameOver: false,
+        clicks: 0,
+        highScore: 'NA'
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.setState({
             currentCardList: this.shuffleArr(cards)
         })
     }
 
-    shuffleArr(arr) {
+    shuffleArr = (arr) => {
         const cardsList = arr.sort(() => Math.random() - 0.5);
-    
+
         let newCards = cardsList.map((card, index) => {
             return {
                 id: index,
                 number: card.number,
                 flipped: false,
                 matched: false
-              };
+            };
         })
         return newCards
     }
 
     handleClick = (number, index) => {
-        const {currentCardList, flippedCards} = this.state
+        const { currentCardList, flippedCards, clicks } = this.state
 
         let currentCard = {
             number,
@@ -46,23 +50,20 @@ class PlayGame extends Component {
             return card;
         });
 
-
-        console.log('first update', updateCards)
-
-
         let updateFlipped = flippedCards;
         updateFlipped.push(currentCard);
 
         this.setState({
-            currentCardList: updateCards
+            currentCardList: updateCards,
+            clicks: clicks + 1
         })
-        this.addToFlippedCards(updateFlipped)
 
+        this.addToFlippedCards(updateFlipped)
 
     }
 
-    addToFlippedCards(updateFlipped) {
-        const {currentCardList, flippedCards} = this.state
+    addToFlippedCards = (updateFlipped) => {
+        const { flippedCards } = this.state
 
         this.setState({
             flippedCards: updateFlipped
@@ -72,26 +73,26 @@ class PlayGame extends Component {
             if (flippedCards.length === 2) {
                 setTimeout(() => {
                     this.check();
-                }, 750);
+                }, 1000);
             }
         })
     }
 
     check = () => {
-        const {currentCardList, flippedCards} = this.state
+        const { currentCardList, flippedCards } = this.state
         let updateCards = currentCardList;
 
         if (
-          flippedCards[0].number === flippedCards[1].number &&
-          flippedCards[0].index !== flippedCards[1].index
+            flippedCards[0].number === flippedCards[1].number &&
+            flippedCards[0].index !== flippedCards[1].index
         ) {
-          updateCards[flippedCards[0].index].matched = true;
-          updateCards[flippedCards[1].index].matched = true;
+            updateCards[flippedCards[0].index].matched = true;
+            updateCards[flippedCards[1].index].matched = true;
+            this.isGameOver()
         } else {
-          updateCards[flippedCards[0].index].flipped = false;
-          updateCards[flippedCards[1].index].flipped = false;
+            updateCards[flippedCards[0].index].flipped = false;
+            updateCards[flippedCards[1].index].flipped = false;
         }
-
 
         this.setState({
             currentCardList: updateCards,
@@ -100,9 +101,32 @@ class PlayGame extends Component {
 
     }
 
-    render() {
-        console.log('staaaaate',this.state.currentCardList)
+    isGameOver = () => {
+        let gameIsOver = true;
+        this.state.currentCardList.map(card => {
+            if (!card.matched) {
+                gameIsOver = false
+            }
+        })
 
+        this.setState({
+            gameOver: gameIsOver,
+            highScore: this.state.clicks
+        })
+    }
+
+    restart = () => {
+        this.setState({
+            currentCardList: this.shuffleArr(cards),
+            flippedCards: [],
+            gameOver: false,
+            clicks: 0
+        })
+    }
+
+
+
+    render() {
         const gameCardsList = this.state.currentCardList.map((card, i) => {
             return (
                 <GameCard
@@ -119,12 +143,24 @@ class PlayGame extends Component {
         return (
             <div className='container'>
                 <div className="header">
-                    <h1 className='title'>CARD MATCHING GAME</h1>
-                    <h3 className="timer">Timer</h3>
+                    <div className="top-header-row">
+                        <h1 className='title'>Card Matching Game</h1>
+                        <h1 className="score-title title">High Score: {this.state.highScore}</h1>
+                    </div>
+                    <ClickCounter 
+                        clicks={this.state.clicks} 
+                        gameOver={this.state.gameOver}
+                    />
                 </div>
-                <div className="game-container">
-                    {gameCardsList}
-                </div>
+                {!this.state.gameOver 
+                    ? <div className="game-container">
+                        {gameCardsList}
+                      </div>
+                    : <GameOverView 
+                        restart={() => this.restart()} 
+                        clicks={this.state.clicks}
+                      />
+                }
             </div>
         )
     }
