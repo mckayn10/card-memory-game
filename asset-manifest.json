@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/card-memory-game/static/css/main.16b9e0c2.chunk.css",
+    "main.css": "/card-memory-game/static/css/main.3cde3661.chunk.css",
     "main.js": "/card-memory-game/static/js/main.11e76418.chunk.js",
     "main.js.map": "/card-memory-game/static/js/main.11e76418.chunk.js.map",
     "runtime-main.js": "/card-memory-game/static/js/runtime-main.9784500a.js",
@@ -10,7 +10,7 @@
     "static/js/3.027e46d0.chunk.js": "/card-memory-game/static/js/3.027e46d0.chunk.js",
     "static/js/3.027e46d0.chunk.js.map": "/card-memory-game/static/js/3.027e46d0.chunk.js.map",
     "index.html": "/card-memory-game/index.html",
-    "static/css/main.16b9e0c2.chunk.css.map": "/card-memory-game/static/css/main.16b9e0c2.chunk.css.map",
+    "static/css/main.3cde3661.chunk.css.map": "/card-memory-game/static/css/main.3cde3661.chunk.css.map",
     "static/js/2.99841b60.chunk.js.LICENSE.txt": "/card-memory-game/static/js/2.99841b60.chunk.js.LICENSE.txt",
     "static/media/bird.08e684c3.jpg": "/card-memory-game/static/media/bird.08e684c3.jpg",
     "static/media/playGame.css": "/card-memory-game/static/media/card-mat.e30b4169.jpg",
@@ -54,7 +54,7 @@
   "entrypoints": [
     "static/js/runtime-main.9784500a.js",
     "static/js/2.99841b60.chunk.js",
-    "static/css/main.16b9e0c2.chunk.css",
+    "static/css/main.3cde3661.chunk.css",
     "static/js/main.11e76418.chunk.js"
   ]
 }
