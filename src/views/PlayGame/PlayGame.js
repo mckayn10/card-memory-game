@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import GameCard from '../../components/GameCard/GameCard'
 import GameOverView from '../GameOver/GaveOverView'
 import ClickCounter from '../../components/ClickCounter/ClickCounter'
-import cards from '../../Data/cardData'
+import friendsCards from '../../Data/cardSetFriends'
+import numberCards from '../../Data/cardSetDefault.js'
+import animalCards from '../../Data/cardSetAnimals.js'
+import ChangeCardsView from '../ChangeCards/ChangeCardsView';
 import './playGame.css'
 
 class PlayGame extends Component {
@@ -11,14 +14,17 @@ class PlayGame extends Component {
         flippedCards: [],
         gameOver: false,
         clicks: 0,
-        highScore: 'NA'
+        highScore: 'NA',
+        changeCardsScreen: false,
+        cardsToUse: numberCards
     }
 
     componentDidMount() {
         this.setState({
-            currentCardList: this.shuffleArr(cards)
+            currentCardList: this.shuffleArr(this.state.cardsToUse)
         })
     }
+
 
     shuffleArr = (arr) => {
         const cardsList = arr.sort(() => Math.random() - 0.5);
@@ -43,8 +49,8 @@ class PlayGame extends Component {
             index
         };
 
-        if(flippedCards.length > 0){
-            if(currentCard.index === flippedCards[0].index){
+        if (flippedCards.length > 0) {
+            if (currentCard.index === flippedCards[0].index) {
                 return false;
             }
         }
@@ -123,16 +129,55 @@ class PlayGame extends Component {
             gameOver: gameIsOver,
         })
 
-        if(gameIsOver){
+        if (gameIsOver) {
             this.setState({
                 highScore: this.state.clicks
             })
         }
     }
 
+    selectNewCards = (e) => {
+
+        const cardType = e.target.value
+        let selectedCards = ''
+
+        switch (cardType) {
+            case 'numbers':
+                selectedCards = numberCards
+                break;
+            case 'friends':
+                selectedCards = friendsCards
+                break;
+            case 'animals':
+                selectedCards = animalCards
+                break;
+            default:
+                selectedCards = numberCards
+        }
+
+        console.log('cards', selectedCards)
+
+
+
+        this.setState({
+            cardsToUse: selectedCards,
+            changeCardsScreen: false
+        }, () => {
+            this.restart(selectedCards)
+        })
+
+
+    }
+
+    handleChangeCardSet = () => {
+        this.setState({
+            changeCardsScreen: true
+        })
+    }
+
     restart = () => {
         this.setState({
-            currentCardList: this.shuffleArr(cards),
+            currentCardList: this.shuffleArr(this.state.cardsToUse),
             flippedCards: [],
             gameOver: false,
             clicks: 0
@@ -158,25 +203,36 @@ class PlayGame extends Component {
 
         return (
             <div className='container'>
-                <div className="header">
-                    <div className="top-header-row">
-                        <h1 className='title'>Card Matching Game</h1>
-                        <h1 className="score-title title">High Score: {this.state.highScore}</h1>
+                {!this.state.changeCardsScreen
+                    ? <div className="header">
+                        <div className="top-header-row">
+                            <button
+                                className='change-cards-title'
+                                onClick={() => this.handleChangeCardSet()}
+                            >Change Card Set
+                            </button>
+                            <h1 className='title'>Card Matching Game</h1>
+                            <h1 className="score-title title">High Score: {this.state.highScore}</h1>
+                        </div>
+                        <ClickCounter
+                            clicks={this.state.clicks}
+                            gameOver={this.state.gameOver}
+                            minClicks={friendsCards.length}
+                        />
+                        {!this.state.gameOver
+                            ? <div className="game-container">
+                                {gameCardsList}
+                            </div>
+                            : <GameOverView
+                                restart={() => this.restart()}
+                                clicks={this.state.clicks}
+                            />
+                        }
                     </div>
-                    <ClickCounter 
-                        clicks={this.state.clicks} 
-                        gameOver={this.state.gameOver}
-                        minClicks={cards.length}
+                    : <ChangeCardsView
+                        selectNewCards={(e) => this.selectNewCards(e)}
                     />
-                </div>
-                {!this.state.gameOver 
-                    ? <div className="game-container">
-                        {gameCardsList}
-                      </div>
-                    : <GameOverView 
-                        restart={() => this.restart()} 
-                        clicks={this.state.clicks}
-                      />
+
                 }
             </div>
         )

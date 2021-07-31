@@ -1,22 +1,22 @@
-import chubbs from '../assets/chubbs2.jpg'
-import piece from '../assets/piece.jpg'
-import donkey from '../assets/donkey.jpg'
-import skin from '../assets/skin.jpg'
-import skeets from '../assets/skeets.jpg'
-import ry from '../assets/ryan.jpg'
-import nikki from '../assets/nikki.jpg'
-import mac from '../assets/mac.jpg'
-import rich from '../assets/rj.jpg'
-import stella from '../assets/stella.jpg'
-import tatum from '../assets/tatum.jpg'
-import jonas from '../assets/jonas.jpg'
-import packs from '../assets/packs.jpg'
-import pais from '../assets/pais.jpg'
+import chubbs from '../assets/friendCards/chubbs2.jpg'
+import piece from '../assets/friendCards/piece.jpg'
+import donkey from '../assets/friendCards/donkey.jpg'
+import skin from '../assets/friendCards/skin.jpg'
+import skeets from '../assets/friendCards/skeets.jpg'
+import ry from '../assets/friendCards/ryan.jpg'
+import nikki from '../assets/friendCards/nikki.jpg'
+import mac from '../assets/friendCards/mac.jpg'
+import rich from '../assets/friendCards/rj.jpg'
+import stella from '../assets/friendCards/stella.jpg'
+import tatum from '../assets/friendCards/tatum.jpg'
+import jonas from '../assets/friendCards/jonas.jpg'
+import packs from '../assets/friendCards/packs.jpg'
+import pais from '../assets/friendCards/pais.jpg'
 
 const number = Math.floor(Math.random() * 100);
 
 
-const cards = [
+const friendsCards = [
     {
         number: 1,
         image: chubbs
@@ -116,4 +116,4 @@ const cards = [
 ]
 
 
-export default cards
+export default friendsCards

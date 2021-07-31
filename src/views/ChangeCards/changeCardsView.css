@@ -1,0 +1,19 @@
+.card-set-btn {
+    margin: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 25px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    background-color: rgb(252, 88, 88);
+    color: white;
+    cursor: pointer;
+    width: 200px;
+}
+
+.card-set-btn:hover {
+    background-color: white;
+    color: rgb(252, 88, 88);
+}
